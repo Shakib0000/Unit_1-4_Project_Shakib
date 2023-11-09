@@ -2,14 +2,14 @@ public class SurviveMrDas {
 
     // Instance Variables
     private String name;
-    private int dasLocation = 20; // The distance in feet from the player.
-    private int timer = 30; // The amount of time left in minutes.
-    private int tasksCompleted = 0; // The number of tasks completed.
-    private int useInstagramProgress = 0; // Percentage progress of scrolling through Instagram.
-    private int watchFortniteProgress = 0; // Percentage progress of watching Fortnite videos.
-    private int playAmongUsProgress = 0; // Percentage progress of playing Among Us.
-    private int cartwheelProgress = 0; // Percentage progress of cartwheeling across the room.
-    private boolean finishingTasks = false; // Current status of the player, false if not in the process of completing tasks, true otherwise.
+    private int dasLocation; // The distance in feet from the player.
+    private int timer; // The amount of time left in minutes.
+    private int tasksCompleted; // The number of tasks completed.
+    private int useInstagramProgress; // Percentage progress of scrolling through Instagram.
+    private int watchFortniteProgress; // Percentage progress of watching Fortnite videos.
+    private int playAmongUsProgress; // Percentage progress of playing Among Us.
+    private int cartwheelProgress; // Percentage progress of cartwheeling across the room.
+    private boolean finishingTasks; // Current status of the player, false if not in the process of completing tasks, true otherwise.
 
     // Constructor
 
@@ -19,6 +19,14 @@ public class SurviveMrDas {
 
     public SurviveMrDas(String name) {
         this.name = name;
+        this.dasLocation = 20;
+        this.timer = 30;
+        this.tasksCompleted = 0;
+        this.useInstagramProgress = 0;
+        this.watchFortniteProgress = 0;
+        this.playAmongUsProgress = 0;
+        this.cartwheelProgress = 0;
+        this.finishingTasks = false;
     }
 
     // Getter Methods
@@ -41,12 +49,35 @@ public class SurviveMrDas {
 
     // Methods for Game Mechanics
 
-    public void passTime(int minutes) {
-        timer -= minutes;
+    public int randomNumberGenerator(int min, int max) {
+        return (int) (Math.random() * max) + min;
     }
 
-    public void moveDas(int amount) {
-        dasLocation += amount;
+    public int passTime() {
+        int randomNum = randomNumberGenerator(1,5);
+        if (randomNum == 5) {
+            timer -= 2;
+        }
+        else {
+            timer -= 1;
+        }
+        return randomNum;
+    }
+
+    public void moveDas() {
+        int randomNum = randomNumberGenerator(1,5);
+        if (finishingTasks) {
+            randomNum *= -1;
+        }
+        if (randomNum < 0 && (Math.abs(randomNum) > dasLocation)) {
+            dasLocation = 0;
+        }
+        else if (randomNum > 0 && (randomNum + dasLocation > 30)) {
+            dasLocation = 30;
+        }
+        else {
+            dasLocation += randomNum;
+        }
     }
 
     public String fulfillTask(String task) {
@@ -102,6 +133,7 @@ public class SurviveMrDas {
             return "\nYou have begun doing extremely boring AP CSA work... keep in mind that you are fighting the urge to sleep.";
         }
         else if (task.equals("6")) {
+            finishingTasks = true;
             return "\nMr. Das is " + dasLocation + " feet away from you.";
         }
         return "\nThere was an error.";

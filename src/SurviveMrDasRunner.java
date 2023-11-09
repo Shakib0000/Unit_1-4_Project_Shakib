@@ -13,27 +13,15 @@ public class SurviveMrDasRunner {
         SurviveMrDas gameManager = new SurviveMrDas(name);
 
         while (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() < 4 && gameManager.getDasLocation() > 0) {
+            gameManager.moveDas();
+
             String action = askQuestion("\nYou are " + gameManager.getTimer() + " minutes away from falling asleep.\nWhat do you want to do? Enter one of the following 4 choices:\n\"1\" to scroll through Instagram\n\"2\" to watch Fortnite videos\n\"3\" to play Among Us\n\"4\" to cartwheel across the room\n\"5\" to work on boring, AP CSA work\n\"6\" to look behind you\n");
             System.out.println(gameManager.fulfillTask(action));
 
-            int randomChance = (int) (Math.random() * 5) + 1;
-            if (randomChance == 5) {
+            int passTimeResult = gameManager.passTime();
+            if (passTimeResult == 5) {
                 System.out.println("Whoops! You doze off for a second and almost fall out of your chair. Time is ticking, get yourself together!");
-                gameManager.passTime(2);
             }
-            else {
-                gameManager.passTime(1);
-            }
-
-            if (gameManager.getFinishingTasks()) {
-                gameManager.moveDas(-1 * ((int) (Math.random() * 5) + 1));
-            }
-            else {
-                if (gameManager.getDasLocation() < 30) {
-                    gameManager.moveDas((int) (Math.random() * 5) + 1);
-                }
-            }
-
         }
 
         if (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() == 4 && gameManager.getDasLocation() > 0) {
