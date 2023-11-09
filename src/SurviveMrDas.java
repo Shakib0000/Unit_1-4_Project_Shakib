@@ -13,10 +13,6 @@ public class SurviveMrDas {
 
     // Constructor
 
-    public String getName() {
-        return name;
-    }
-
     public SurviveMrDas(String name) {
         this.name = name;
         this.dasLocation = 20;
@@ -31,6 +27,10 @@ public class SurviveMrDas {
 
     // Getter Methods
 
+    public String getName() {
+        return name;
+    }
+    
     public int getTimer() {
         return timer;
     }
