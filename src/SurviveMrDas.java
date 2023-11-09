@@ -101,10 +101,10 @@ public class SurviveMrDas {
             finishingTasks = false;
             return "\nYou have begun doing extremely boring AP CSA work... keep in mind that you are fighting the urge to sleep.";
         }
+        else if (task.equals("6")) {
+            return "\nMr. Das is " + dasLocation + " feet away from you.";
+        }
         return "\nThere was an error.";
     }
-
-
-
 
 }
