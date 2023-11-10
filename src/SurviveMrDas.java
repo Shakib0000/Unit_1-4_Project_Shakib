@@ -1,6 +1,7 @@
 public class SurviveMrDas {
 
     // Instance Variables
+    
     private String name;
     private int dasLocation; // The distance in feet from the player.
     private int timer; // The amount of time left in minutes.
@@ -55,7 +56,7 @@ public class SurviveMrDas {
 
     public int passTime() {
         int randomNum = randomNumberGenerator(1,5);
-        if (randomNum == 5) {
+        if (randomNum == 5 && timer >= 2) {
             timer -= 2;
         }
         else {
