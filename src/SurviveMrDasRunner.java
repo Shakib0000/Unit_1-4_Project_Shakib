@@ -21,7 +21,7 @@ public class SurviveMrDasRunner {
         5. If you look behind you, you will find out how many feet away Mr. Das is from you. When looking behind yourself, he still moves towards you so be wary with how often you look behind you. Hint: Just don't look behind you.
         
         I sincerely hope you enjoy your final 30 minutes of breathing.
-        Enter your name:""");
+        Enter your name:\s""");
         SurviveMrDas gameManager = new SurviveMrDas(name);
 
         while (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() < 4 && gameManager.getDasLocation() > 0) {
