@@ -9,13 +9,25 @@ public class SurviveMrDasRunner {
     }
 
     public static void main(String[] args) {
-        String name = askQuestion("Welcome to Survive Mr. Das!\nTurn your lights on if you aren't fond of spooks, because what may seem simple and harmless may just bring about your doom.\nTo survive, you must complete four specific tasks before you end up falling asleep or being caught doing those tasks by Mr. Das.\nIf you are caught asleep or if you are caught by Mr. Das while doing your tasks, you will not be a happy person.\nJust keep that in mind.\n\nAnyways, enter your name: ");
+        String name = askQuestion("""
+        Welcome to Survive Mr. Das!
+        Turn your lights on if you aren't fond of spooks, because what may seem simple and harmless may just bring about your doom.
+        
+        Here are the rules of the game:
+        1. To win the game by surviving Mr. Das' AP CSA class, you must complete four specific tasks: scrolling through Instagram, watching Fortnite videos, playing Among Us, and cartwheeling across the room. Each turn spent working on tasks will increase the task's progress by 25%.
+        2. When you are completing your four tasks, Mr. Das will move towards you by a random number of feet from 1-5. He is 20 feet away from you at the start of the game. If his distance from you reaches 0, you lose the game.
+        3. During the duration of the game, a timer will count down from 30 minutes by 1 minute each turn, and if it reaches 0, you will fall asleep and lose the game. There is also a 20% chance you will fall out of your chair and 2 minutes will pass instead of 1.
+        4. If you work on AP CSA work, Mr. Das will move away from you by a random number of feet from 1-5. Also, if he is 5 or less feet away from you when you decide to work on AP CSA work, there is a chance he sees you alt-tabbing and catches you anyway.
+        5. If you look behind you, you will find out how many feet away Mr. Das is from you. When looking behind yourself, he still moves towards you so be wary with how often you look behind you. Hint: Just don't look behind you.
+        
+        I sincerely hope you enjoy your final 30 minutes of breathing.
+        Enter your name:""");
         SurviveMrDas gameManager = new SurviveMrDas(name);
 
         while (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() < 4 && gameManager.getDasLocation() > 0) {
             gameManager.moveDas();
 
-            String action = askQuestion("\nYou are " + gameManager.getTimer() + " minutes away from falling asleep.\nWhat do you want to do? Enter one of the following 4 choices:\n\"1\" to scroll through Instagram\n\"2\" to watch Fortnite videos\n\"3\" to play Among Us\n\"4\" to cartwheel across the room\n\"5\" to work on boring, AP CSA work\n\"6\" to look behind you\n");
+            String action = askQuestion("\nYou are " + gameManager.getTimer() + " minutes away from falling asleep.\nWhat do you want to do? Enter one of the following 6 choices:\n\"1\" to scroll through Instagram\n\"2\" to watch Fortnite videos\n\"3\" to play Among Us\n\"4\" to cartwheel across the room\n\"5\" to work on boring, AP CSA work\n\"6\" to look behind you\n");
             System.out.println(gameManager.fulfillTask(action));
 
             int passTimeResult = gameManager.passTime();
