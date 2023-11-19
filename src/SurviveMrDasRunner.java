@@ -1,7 +1,13 @@
 import java.util.Scanner;
 
 public class SurviveMrDasRunner {
-
+    /**
+     * The askQuestion prints a question in the output for the user to input an answer to and the
+     * user's answer is stored in a variable.
+     *
+     * @param question String representing the question to be printed in the output
+     * @return a String representing the input by the player; the player's answer to the question
+     */
     public static String askQuestion(String question) {
         Scanner s = new Scanner(System.in);
         System.out.print(question);
@@ -54,5 +60,4 @@ public class SurviveMrDasRunner {
             System.out.println("If you are seeing this message, somehow the game broke?!?!?!");
         }
     }
-
 }
