@@ -6,7 +6,7 @@
  */
 public class SurviveMrDas {
     // Creating instance variables to serve as game properties
-    private String name;
+    private String name; // The name of the player.
     private int dasLocation; // The distance in feet from the player.
     private int timer; // The amount of time left in minutes.
     private int tasksCompleted; // The number of tasks completed.
