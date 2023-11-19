@@ -5,6 +5,7 @@
  * finishingTasks.
  */
 public class SurviveMrDas {
+    // Creating instance variables to serve as game properties
     private String name;
     private int dasLocation; // The distance in feet from the player.
     private int timer; // The amount of time left in minutes.
@@ -32,6 +33,8 @@ public class SurviveMrDas {
         this.cartwheelProgress = 0;
         this.finishingTasks = false;
     }
+
+    // Getter Methods for the SurviveMrDas class
 
     /**
      * getName is a getter method for the SurviveMrDas class. This method will return a String
@@ -73,6 +76,8 @@ public class SurviveMrDas {
         return dasLocation;
     }
 
+    // Methods for Game Mechanics
+
     /**
      * The randomNumberGenerator method will generate a random number given a minimum integer and a
      * maximum integer.
@@ -94,7 +99,7 @@ public class SurviveMrDas {
      */
     public int passTime() {
         int randomNum = randomNumberGenerator(1,5);
-        if (randomNum == 5 && timer >= 2) {
+        if (randomNum == 5 && timer >= 2) { // 5 represents the 20% chance of falling off the chair, resulting in timer decreasing by 2
             timer -= 2;
         }
         else {
@@ -114,13 +119,13 @@ public class SurviveMrDas {
     public void moveDas() {
         int randomNum = randomNumberGenerator(1,5);
         if (finishingTasks) {
-            randomNum *= -1;
+            randomNum *= -1;    // Adding a negative later on, making Mr. Das' distance from the player decrease
         }
         if (randomNum < 0 && (Math.abs(randomNum) > dasLocation)) {
-            dasLocation = 0;
+            dasLocation = 0;    // Mr. Das' distance went below 0 so set it back to the minimum value of 0.
         }
         else if (randomNum > 0 && (randomNum + dasLocation > 30)) {
-            dasLocation = 30;
+            dasLocation = 30;   // Mr. Das' distance went above 30 so set it back to the maximum value of 30.
         }
         else {
             dasLocation += randomNum;
@@ -136,7 +141,7 @@ public class SurviveMrDas {
      * @return a String representing the outcome of the player's choice in a properly formatted sentence
      */
     public String fulfillTask(String task) {
-        if (task.equals("1") && useInstagramProgress != 100) {
+        if (task.equals("1") && useInstagramProgress != 100) { // User wants to scroll through Instagram and the task is incomplete
             finishingTasks = true;
             useInstagramProgress += 25;
             if (useInstagramProgress == 100) {
@@ -144,10 +149,10 @@ public class SurviveMrDas {
             }
             return "\nYour progress on scrolling through Instagram is: " + useInstagramProgress + "%";
         }
-        else if (task.equals("1") && useInstagramProgress == 100) {
+        else if (task.equals("1") && useInstagramProgress == 100) { // User wants to scroll through Instagram but the task is already completed
             return "\nYou have already finished scrolling through Instagram.";
         }
-        else if (task.equals("2") && watchFortniteProgress != 100) {
+        else if (task.equals("2") && watchFortniteProgress != 100) { // User wants to watch Fortnite and the task is incomplete
             finishingTasks = true;
             watchFortniteProgress += 25;
             if (watchFortniteProgress == 100) {
@@ -155,10 +160,10 @@ public class SurviveMrDas {
             }
             return "\nYour progress on watching Fortnite videos is: " + watchFortniteProgress + "%";
         }
-        else if (task.equals("2") && watchFortniteProgress == 100) {
+        else if (task.equals("2") && watchFortniteProgress == 100) { // User wants to watch Fortnite but the task is already completed
             return "\nYou have already finished watching Fortnite videos.";
         }
-        else if (task.equals("3") && playAmongUsProgress != 100) {
+        else if (task.equals("3") && playAmongUsProgress != 100) { // User wants to play Among Us and the task is incomplete
             finishingTasks = true;
             playAmongUsProgress += 25;
             if (playAmongUsProgress == 100) {
@@ -166,10 +171,10 @@ public class SurviveMrDas {
             }
             return "\nYour progress on playing Among Us is: " + playAmongUsProgress + "%";
         }
-        else if (task.equals("3") && playAmongUsProgress == 100) {
+        else if (task.equals("3") && playAmongUsProgress == 100) { // User wants to play Among Us but the task is already completed
             return "\nYou have already finished playing Among Us.";
         }
-        else if (task.equals("4") && cartwheelProgress != 100) {
+        else if (task.equals("4") && cartwheelProgress != 100) { // User wants to cartwheel across the room and the task is incomplete
             finishingTasks = true;
             cartwheelProgress += 25;
             if (cartwheelProgress == 100) {
@@ -177,20 +182,17 @@ public class SurviveMrDas {
             }
             return "\nYour progress on cartwheeling across the room is: " + cartwheelProgress + "%";
         }
-        else if (task.equals("4") && cartwheelProgress == 100) {
+        else if (task.equals("4") && cartwheelProgress == 100) { // User wants to cartwheel across the room but the task is already completed
             return "\nYou have already finished cartwheeling across the room.";
         }
-        else if (task.equals("4") && cartwheelProgress == 100) {
-            return "\nYou have already finished cartwheeling across the room.";
-        }
-        else if (task.equals("5")) {
+        else if (task.equals("5")) { // User wants to do AP CSA work, this makes Mr. Das start moving away from the player until the player begins doing their own tasks again
             finishingTasks = false;
             return "\nYou have begun doing extremely boring AP CSA work... keep in mind that you are fighting the urge to sleep.";
         }
-        else if (task.equals("6")) {
+        else if (task.equals("6")) { // User wants to look behind them to check Mr. Das' location
             finishingTasks = true;
             return "\nMr. Das is " + dasLocation + " feet away from you.";
         }
-        return "\nThere was an error.";
+        return "\nThere was an error."; // Prevents code from breaking, helps debug
     }
 }

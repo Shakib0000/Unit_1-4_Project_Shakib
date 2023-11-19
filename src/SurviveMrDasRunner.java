@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class SurviveMrDasRunner {
     /**
-     * The askQuestion prints a question in the output for the user to input an answer to and the
+     * The askQuestion method prints a question in the output for the user to input an answer to and the
      * user's answer is stored in a variable.
      *
      * @param question String representing the question to be printed in the output
@@ -15,6 +15,7 @@ public class SurviveMrDasRunner {
     }
 
     public static void main(String[] args) {
+        // Introducing the user to the game and its rules
         String name = askQuestion("""
         Welcome to Survive Mr. Das!
         Turn your lights on if you aren't fond of spooks, because what may seem simple and harmless may just bring about your doom.
@@ -30,6 +31,7 @@ public class SurviveMrDasRunner {
         Enter your name:\s""");
         SurviveMrDas gameManager = new SurviveMrDas(name);
 
+        // Creating a loop that keeps the game running while the timer remains above 0, the player has not finished their four tasks, and Mr. Das is more than 0 feet away from the player.
         while (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() < 4 && gameManager.getDasLocation() > 0) {
             gameManager.moveDas();
 
@@ -42,22 +44,23 @@ public class SurviveMrDasRunner {
             }
         }
 
-        if (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() == 4 && gameManager.getDasLocation() > 0) {
+        // End of loop results in the outcome of the game being printed, either the player wins or the player loses by falling asleep or the player loses by Mr. Das catching them.
+        if (gameManager.getTimer() > 0 && gameManager.getTasksCompleted() == 4 && gameManager.getDasLocation() > 0) { // The player avoided being caught, didn't fall asleep, and finished all their four tasks
             System.out.println("\nYou have managed to stay awake and you were not caught off-task during Mr. Das' class.");
             System.out.println("Mr. Das: Impressive, " + gameManager.getName() + ". You managed to survive my class. You get to live yet another day. Let's see if you can survive tomorrow as well...\n*You leave AP CSA class in one piece*\nYOU WIN!");
         }
-        else if (gameManager.getDasLocation() <= 0) {
+        else if (gameManager.getDasLocation() <= 0) { // Mr. Das caught the player
             System.out.println("\nMr. Das is looking right down at you. You look up, your face filled with terror.");
             askQuestion("Mr. Das: " + gameManager.getName() + ", HOW DARE YOU BE OFF-TASK IN MY CLASS!!!!!!!!!!!! YOU ABSOLUTE BUFFOON. DO YOU HAVE ANY LAST WORDS? ");
             System.out.println("Mr. Das: OK. I PROBABLY WON'T EVEN BOTHER PUTTING THEM ON YOUR GRAVESTONE. SEE YOU IN THE AFTERLIFE BUDDY! \n*You perish under Mr. Das' wrath*\nGAME OVER!");
         }
-        else if (gameManager.getTimer() <= 0) {
+        else if (gameManager.getTimer() <= 0) { // Time ran out
             System.out.println("\nYou fall asleep from boredom. You are woken up by Mr. Das' violent footsteps behind you.");
             askQuestion("Mr. Das: " + gameManager.getName() + ", HOW DARE YOU FALL ASLEEP IN MY CLASS!!!!!!!!!!!! YOU ABSOLUTE BUFFOON. DO YOU HAVE ANY LAST WORDS? ");
             System.out.println("Mr. Das: OK. I PROBABLY WON'T EVEN BOTHER PUTTING THEM ON YOUR GRAVESTONE. SEE YOU IN THE AFTERLIFE BUDDY! \n*You perish under Mr. Das' wrath*\nGAME OVER!");
         }
         else {
-            System.out.println("If you are seeing this message, somehow the game broke?!?!?!");
+            System.out.println("If you are seeing this message, somehow the game broke?!?!?!"); // Prevents code from breaking, helps debug
         }
     }
 }
